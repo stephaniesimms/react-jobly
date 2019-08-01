@@ -8,9 +8,9 @@ class NavBar extends Component {
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         
-        <a href="/" className="nav-item">
+        <div href="/" className="nav-item">
           <NavLink className="nav-link" to="/">Jobly</NavLink>
-        </a>
+        </div>
 
         <ul className="navbar-nav ml-auto">
           <li className="nav-item mr-4">
@@ -37,20 +37,3 @@ class NavBar extends Component {
 
 export default NavBar;
 
-{/* <Nav className="justify-content-end" activeKey="/home">
-  <Nav.Item>
-    <Nav.Link href="/home">Active</Nav.Link>
-  </Nav.Item>
-  <Nav.Item>
-    <Nav.Link eventKey="link-1">Link</Nav.Link>
-  </Nav.Item>
-  <Nav.Item>
-    <Nav.Link eventKey="link-2">Link</Nav.Link>
-  </Nav.Item>
-  <Nav.Item>
-    <Nav.Link eventKey="disabled" disabled>
-      Disabled
-      </Nav.Link>
-  </Nav.Item>
-</Nav>
-</> */}

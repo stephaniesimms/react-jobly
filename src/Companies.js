@@ -29,9 +29,8 @@ class Companies extends Component {
 
   render() {
     let companies = this.state.companies.map(company =>
-      <Link className="CompanyCard" to={`/companies/${company.handle}`}>
+      <Link key={company.handle} className="CompanyCard" to={`/companies/${company.handle}`}>
         <CompanyCard
-          key={company.name}
           name={company.name}
           description={company.description}
           logo_url={company.logo_url} />
@@ -40,7 +39,7 @@ class Companies extends Component {
 
     return (
       <div>
-        <Search filterCo={this.filterCompanies} />
+        <Search search="company" filterCo={this.filterCompanies} />
         {companies}
       </div>
     );

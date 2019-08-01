@@ -32,15 +32,17 @@ class JoblyApi {
     return res.company;
   }
 
+  // TODO: move check for companies search or job search from Search component to API call here
   static async getCompanyList(data) {
     let res = await this.request(`companies/`, data);
     return res.companies;
   }
 
-  static async getJobList() {
-    let res = await this.request(`jobs/`);
+  static async getJobList(data) {
+    let res = await this.request(`jobs/`, data);
     return res.jobs;
   }
+
   
   // TODO: get user for authentication
 
