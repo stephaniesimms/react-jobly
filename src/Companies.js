@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import JoblyApi from "./JoblyApi";
 import CompanyCard from "./CompanyCard";
 import Search from "./Search";
+import "./Companies.scss";
 
 class Companies extends Component {
   constructor(props) {
@@ -27,13 +28,14 @@ class Companies extends Component {
   }
 
   render() {
-    let companies = this.state.companies.map(company =>      
-      <Link to={`/companies/${company.handle}`}> 
-      <CompanyCard
-        key={company.name}
-        name={company.name}
-        description={company.description}
-          logo={company.logo_url} /> </Link>
+    let companies = this.state.companies.map(company =>
+      <Link className="CompanyCard" to={`/companies/${company.handle}`}>
+        <CompanyCard
+          key={company.name}
+          name={company.name}
+          description={company.description}
+          logo_url={company.logo_url} />
+      </Link>
     );
 
     return (

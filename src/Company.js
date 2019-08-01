@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import JoblyApi from "./JoblyApi";
-import JobCard from "./JobCard"
+import JobCard from "./JobCard";
 
 class Company extends Component {
   constructor(props) {
     super(props);
     this.state = {
       jobs: [],
-      companyName: '',
-      companyDescription: '',
+      companyName: "",
+      companyDescription: "",
       isLoading: true
     };
   }
@@ -34,7 +34,6 @@ class Company extends Component {
 
     const jobs = this.state.jobs.map(job =>
       <JobCard
-        className="card"
         key={job.id}
         title={job.title}
         salary={job.salary}
@@ -44,8 +43,8 @@ class Company extends Component {
 
     return (
       <div>
-        <div>
-          <p><strong>{this.state.companyName}</strong></p>
+        <div className="my-5">
+          <h5>{this.state.companyName}</h5>
           <p>{this.state.companyDescription}</p>
         </div>
         <div>

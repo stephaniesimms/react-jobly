@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import JoblyApi from "./JoblyApi";
+import Button from "react-bootstrap/Button";
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+
 
 class Search extends Component {
   constructor(props) {
@@ -7,7 +12,6 @@ class Search extends Component {
     this.state = {
       search: "",
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,27 +26,26 @@ class Search extends Component {
     this.props.filterCo(response);
   }
 
-
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input 
-            type="text" 
-            name="search"
-            className="form-control"
-            value={this.state.search}
-            onChange={this.handleChange}
+        <Form onSubmit={this.handleSubmit}>
+          <InputGroup className="my-5">
+            <FormControl
+              name="search"
+              value={this.state.search}
+              placeholder="Enter search term"
+              aria-label="Enter search term"
             />
-        <button 
-          type="submit"
-          className="btn btn-primary">
-          Submit
-        </button>
-        </form>
+            <InputGroup.Append>
+              <Button variant="info">Submit</Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </Form>
       </div>
     );
   }
 }
 
 export default Search;
+
