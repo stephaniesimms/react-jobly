@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import JoblyApi from "./JoblyApi";
 import CompanyCard from "./CompanyCard";
 import Search from "./Search";
-import "./Companies.scss";
+import "./CompanyList.scss";
 
-class Companies extends Component {
+class CompanyList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,10 +21,7 @@ class Companies extends Component {
   }
   /** sets the state for the filtered list of companies based on search terms */
   filterCompanies(companies) {
-    this.setState({
-      companies: companies
-    });
-
+    this.setState({ companies });
   }
 
   render() {
@@ -47,4 +44,4 @@ class Companies extends Component {
 
 }
 
-export default Companies;
+export default CompanyList;

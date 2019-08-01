@@ -19,9 +19,8 @@ class JobList extends Component {
 
   /** sets the state for the filtered list of companies based on search terms */
   filterJobs(jobs) {
-    this.setState({
-      jobs: jobs
-    });
+    
+    this.setState({ jobs });
   }
 
   render() {

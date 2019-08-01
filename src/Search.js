@@ -21,7 +21,7 @@ class Search extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  // TODO: move this check to JoblyApi file to make appropriate API call there
+  // TODO: pass data up to parent component and make api calls there
   async handleSubmit(e) {
     e.preventDefault();
     let response;
