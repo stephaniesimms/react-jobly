@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import JoblyApi from "./JoblyApi";
 import CompanyCard from "./CompanyCard";
 import Search from "./Search";
@@ -18,7 +20,6 @@ class Companies extends Component {
   }
   /** sets the state for the filtered list of companies based on search terms */
   filterCompanies(companies) {
-    console.log(companies)
     this.setState({
       companies: companies
     });
@@ -26,15 +27,15 @@ class Companies extends Component {
   }
 
   render() {
-    //TODO: add search and return it 
-
-    let companies = this.state.companies.map(company =>
+    let companies = this.state.companies.map(company =>      
+      <Link to={`/companies/${company.handle}`}> 
       <CompanyCard
         key={company.name}
         name={company.name}
         description={company.description}
-        logo={company.logo_url} />
-    )
+          logo={company.logo_url} /> </Link>
+    );
+
     return (
       <div>
         <Search filterCo={this.filterCompanies} />
