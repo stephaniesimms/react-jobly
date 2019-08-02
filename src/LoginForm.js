@@ -9,6 +9,7 @@ class LoginForm extends Component {
       // firstname: "",
       // lastname: "",
       // email: "",
+      //errors: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,7 +23,6 @@ class LoginForm extends Component {
   // TODO: pass data up to parent component and make api calls there
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state,"this.state")
     this.props.authenticate(this.state);
   }
 

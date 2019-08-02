@@ -5,53 +5,54 @@ import NavBar from "./NavBar";
 import JoblyApi from "./JoblyApi";
 import jwt from 'jsonwebtoken';
 
-// add state for currUser
-// add componentDidMount() method to check if currUser exists/is logged in
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currUser: {},
-      error: ""
+      isLoggedIn: false
     };
     this.authenticate = this.authenticate.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount() {
-    if (Object.keys(this.state.currUser).length !== 0) {
-      //pass currUser for authentication to each route
-    }
-    else {
-      this.authenticate();
-    }
+  async componentDidMount() {
+    await this.authenticate();
   }
 
-// TODO: after decoding token need to check that it is a valid user via API
-// TODO: get full user info from API to add to currUser obj
+/** 
+  checks for token in localStorage: if present, gets currUser info from db
+  and keeps user logged in.
+  if no token present, takes username and password from login form,
+  authenticates user, sets token.
+*/
   async authenticate(userData) {
     if (localStorage.token) {
       let decodedToken = jwt.decode(localStorage.token);
-      // add API call to get full user info from server and add to currUser obj
-      
+      let currentUser = await JoblyApi.getCurrentUser(decodedToken.username);
+
       this.setState({
-        currUser: decodedToken.username
+        currUser: currentUser,
+        isLoggedIn: true
       });
     }
     if (userData) {
       const token = await JoblyApi.authenticateUser(userData);
-      this.setState({ currUser: userData.username });
       localStorage.setItem('token', token);
+
+      let currentUser = await JoblyApi.getCurrentUser(userData.username);
+      this.setState({ currUser: currentUser, isLoggedIn: true });
     }
   }
 
+  handleLogout() {
+    localStorage.removeItem("token");
+    this.setState({ currUser: {}, isLoggedIn: false });
+  }
 
   render() {
     console.log(this.state.currUser)
-    // console.log("error:", this.state.error)
-    // if (this.state.error !== "") {
-    //   return <div>{this.state.error}</div>
-    // }
     return (
       <div>
         <BrowserRouter>
