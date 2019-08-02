@@ -6,12 +6,13 @@ class LoginForm extends Component {
     this.state = {
       username: "",
       password:"",
-      firstname:"",
-      lastname:"",
-      email:"",
+      // firstname: "",
+      // lastname: "",
+      // email: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  
   }
 
   handleChange(e) {
@@ -19,19 +20,25 @@ class LoginForm extends Component {
   }
 
   // TODO: pass data up to parent component and make api calls there
-  async handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
+    console.log(this.state,"this.state")
+    this.props.authenticate(this.state);
   }
 
   render() {
+    
+    // TODO: create logic to display login or sign-up depending on button clicked
+    // for now the form just does login
     return (
       <div>
-        <button className="btn btn-info">Login</button>
-        <button className="btn btn-info">Signup</button>
+        <button id="login" className="btn btn-info">Login</button>
+        {/* <button id="sign-up" className="btn btn-info">Signup</button> */}
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             name="username"
+            placeholder="username"
             className="form-control"
             value={this.state.username}
             onChange={this.handleChange}
@@ -39,10 +46,12 @@ class LoginForm extends Component {
           <input
             type="text"
             name="password"
+            placeholder="password"
             className="form-control"
             value={this.state.password}
             onChange={this.handleChange}
           />
+{/*           
           <input
             type="text"
             name="firstname"
@@ -63,7 +72,8 @@ class LoginForm extends Component {
             className="form-control"
             value={this.state.email}
             onChange={this.handleChange}
-          />
+          /> */}
+
           <button
             type="submit"
             className="btn btn-primary">

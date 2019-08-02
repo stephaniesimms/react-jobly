@@ -2,10 +2,10 @@ import axios from "axios";
 
 class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb = "get") {
-    paramsOrData._token = ( // for now, hardcode token for "testing"
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
-      "3RpbmciLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU1MzcwMzE1M30" +
-      "COmFETEsTxN_VfIlgIKw0bYJLkvbRQNgO1XCSE8NZ0U");
+    // paramsOrData._token = ( // for now, hardcode token for "testing"
+    //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
+    //   "3RpbmciLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU1MzcwMzE1M30" +
+    //   "COmFETEsTxN_VfIlgIKw0bYJLkvbRQNgO1XCSE8NZ0U");
 
     console.debug("API Call:", endpoint, paramsOrData, verb);
 
@@ -42,9 +42,15 @@ class JoblyApi {
     let res = await this.request(`jobs/`, data);
     return res.jobs;
   }
-
   
   // TODO: get user for authentication
+  // post request to log in user
+  // get to check curr user with token
+  static async authenticateUser(data) {
+    let res = await this.request(`login/`, data, "post");
+    return res.token;
+  
+  }
 
 }
 

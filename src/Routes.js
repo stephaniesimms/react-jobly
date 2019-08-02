@@ -11,26 +11,16 @@ import ProfileForm from './ProfileForm';
 class Routes extends Component {
 
   render() {
-
-    // const company = props => {
-    //   let name = props.match.params.handle;
-    //   let currentCompany = this.props..find(
-    //     company => company.name.toLowerCase() === company.toLowerCase()
-    //   );
-    //   return <DogDetails {...props} dog={currentDog} />;
-    // };
-
     return (
       <Switch>
         <Route exact path="/" render={() => <Home/>} />
         <Route exact path="/companies" render={() => <CompanyList />} />
         <Route exact path="/companies/:company" render={rtProps => <Company {...rtProps} />} />
         <Route exact path="/jobs" render={() => <JobList />} />
-        <Route exact path="/login" render={() => <LoginForm />} />
+        <Route exact path="/login" render={() => <LoginForm  authenticate={this.props.authenticate} />} />
         <Route exact path="/profile" render={() => <ProfileForm/>} />
         <Route exact path="/jobs" render={() => <JobList />} />
       </Switch>
-
     );
   }
 }
