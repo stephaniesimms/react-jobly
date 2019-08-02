@@ -5,10 +5,9 @@ import "./NavBar.css";
 class NavBar extends Component {
 
   render() {
-
     if (this.props.isLoggedIn) {
-      return (
 
+      return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
           <div href="/" className="nav-item">
@@ -33,32 +32,24 @@ class NavBar extends Component {
             </li>
           </ul>
         </nav>
-
       )
     }
-       return (
-         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    return (
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
-           <div href="/" className="nav-item">
-             <NavLink className="nav-link" to="/">Jobly</NavLink>
-           </div>
+        <div href="/" className="nav-item">
+          <NavLink className="nav-link" to="/">Jobly</NavLink>
+        </div>
 
-           <ul className="navbar-nav ml-auto">
-             <li className="nav-item">
-               <NavLink className="nav-link" to="/login">Log In</NavLink>
-             </li>
-           </ul>
-         </nav>
-
-       )
-
-    
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/login">Log In</NavLink>
+          </li>
+        </ul>
+      </nav>
+    )
   }
-
-
 }
-
-
 
 export default NavBar;
 

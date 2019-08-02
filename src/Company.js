@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import JoblyApi from "./JoblyApi";
 import JobCard from "./JobCard";
+import UserContext from "./userContext";
+import {Redirect} from "react-router-dom";
 
 class Company extends Component {
   constructor(props) {
@@ -12,6 +14,8 @@ class Company extends Component {
       isLoading: true
     };
   }
+
+  static contextType = UserContext;
 
   async componentDidMount() {
     let companyHandle = this.props.match.params.company;
@@ -25,12 +29,10 @@ class Company extends Component {
     });
   }
 
-
+  
   // render company data at top of page with job cards below
   render() {
-    if (this.state.isLoading) {
-      return <p>Loading......</p>
-    }
+    const currUser = this.context;
 
     const jobs = this.state.jobs.map(job =>
       <JobCard
@@ -40,7 +42,10 @@ class Company extends Component {
         equity={job.equity}
       />
     );
-
+    if (Object.keys(currUser).length !== 0) {
+      if (this.state.isLoading) {
+        return <p>Loading......</p>
+      }
     return (
       <div>
         <div className="my-5">
@@ -53,6 +58,11 @@ class Company extends Component {
       </div>
     )
   }
+    return (
+      <Redirect to="/" />
+    );
+}
+
 }
 
 export default Company;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+
 
 class LoginForm extends Component {
   constructor(props) {
@@ -7,8 +7,8 @@ class LoginForm extends Component {
     this.state = {
       username: "",
       password: "",
-      firstName: "" || null,
-      lastName: "" || null,
+      first_name: "" || null,
+      last_name: "" || null,
       email: "" || null,
       formType: "login"
     };
@@ -16,14 +16,13 @@ class LoginForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.displayLogin = this.displayLogin.bind(this);
     this.displaySignup = this.displaySignup.bind(this);
-
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  // FIXME: successful login takes user to /jobs but does not recognize that they're authenticated until you refresh the page
+  // FIXME: successful login takes user to /, should go to /jobs
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.formType === "login") {
@@ -46,10 +45,7 @@ class LoginForm extends Component {
     });
   }
 
-  render() {
-    // TODO: create logic to display login or sign-up depending on button clicked
-    // for now the form just does login
-    console.log(this.state.formType, "form")
+  render() {    
     if (this.state.formType === "signup") {
       return (
         <div>
@@ -75,16 +71,16 @@ class LoginForm extends Component {
 
             <input
               type="text"
-              name="first-name"
+              name="first_name"
               className="form-control"
-              value={this.state.firstName}
+              value={this.state.first_name}
               onChange={this.handleChange}
             />
             <input
               type="text"
-              name="last-name"
+              name="last_name"
               className="form-control"
-              value={this.state.lastName}
+              value={this.state.last_name}
               onChange={this.handleChange}
             />
             <input
@@ -132,8 +128,6 @@ class LoginForm extends Component {
         </form>
       </div>
     )
-
-
   }
 }
 

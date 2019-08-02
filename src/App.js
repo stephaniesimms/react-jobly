@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Redirect } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Routes from "./Routes";
 import NavBar from "./NavBar";
 import JoblyApi from "./JoblyApi";
 import jwt from 'jsonwebtoken';
+import UserContext from "./userContext";
 
 
 class App extends Component {
@@ -39,12 +40,6 @@ class App extends Component {
       });
     }
     if (userData) {
-      console.log(userData)
-    // let user = {
-    //     username: userData.username,
-    //     password: userData.password
-    //   }
-   
       const token = await JoblyApi.authenticateUser(userData);
       localStorage.setItem('token', token);
 
@@ -54,10 +49,23 @@ class App extends Component {
   }
 
   async register(userData) {
-    const token = await JoblyApi.registerUser(userData);
+    const { username, password, first_name, last_name, email } = userData;
+    /**TODO: put this in own object in loginForm */
+    const user = {
+      username: username,
+      password: password,
+      first_name: first_name,
+      last_name: last_name,
+      email: email
+    }
+    const token = await JoblyApi.registerUser(user);
     localStorage.setItem('token', token);
-
-    const currentUser = await JoblyApi.getCurrentUser(userData.username);
+    const currentUser = {
+      username: username,
+      first_name: first_name,
+      last_name: last_name,
+      email: email
+    }
     this.setState({ currUser: currentUser, isLoggedIn: true });
   }
 
@@ -68,14 +76,16 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <BrowserRouter>
-          <NavBar logout={this.handleLogout} isLoggedIn={this.state.isLoggedIn} />
-          <div className="container">
-            <Routes authenticate={this.authenticate} register={this.register} />
-          </div>
-        </BrowserRouter>
-      </div>
+      <UserContext.Provider value={this.state.currUser}>
+        <div>
+          <BrowserRouter>
+            <NavBar logout={this.handleLogout} isLoggedIn={this.state.isLoggedIn} />
+            <div className="container">
+              <Routes authenticate={this.authenticate} register={this.register} />
+            </div>
+          </BrowserRouter>
+        </div>
+      </UserContext.Provider>
     );
   }
 }

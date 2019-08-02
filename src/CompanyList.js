@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import JoblyApi from "./JoblyApi";
 import CompanyCard from "./CompanyCard";
 import Search from "./Search";
 import "./CompanyList.scss";
+import UserContext from "./userContext";
+
 
 class CompanyList extends Component {
   constructor(props) {
@@ -14,6 +16,8 @@ class CompanyList extends Component {
     };
     this.filterCompanies = this.filterCompanies.bind(this);
   }
+
+  static contextType = UserContext;
 
   async componentDidMount() {
     const companies = await JoblyApi.getCompanyList();
@@ -25,6 +29,8 @@ class CompanyList extends Component {
   }
 
   render() {
+    const currUser = this.context;
+
     let companies = this.state.companies.map(company =>
       <Link key={company.handle} className="CompanyCard" to={`/companies/${company.handle}`}>
         <CompanyCard
@@ -34,14 +40,21 @@ class CompanyList extends Component {
       </Link>
     );
 
+    if (Object.keys(currUser).length !== 0) {
+      if (this.state.isLoading) {
+        return <p>Loading......</p>
+      }
+      return (
+        <div>
+          <Search search="company" filterCo={this.filterCompanies} />
+          {companies}
+        </div>
+      );
+    }
     return (
-      <div>
-        <Search search="company" filterCo={this.filterCompanies} />
-        {companies}
-      </div>
+      <Redirect to="/" />
     );
   }
-
 }
 
 export default CompanyList;
