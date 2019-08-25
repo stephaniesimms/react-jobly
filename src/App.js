@@ -6,7 +6,6 @@ import JoblyApi from "./JoblyApi";
 import jwt from 'jsonwebtoken';
 import UserContext from "./userContext";
 
-//testing git push/pull fork yay
 class App extends Component {
   constructor(props) {
     super(props);
@@ -69,6 +68,7 @@ class App extends Component {
     this.setState({ currUser: currentUser, isLoggedIn: true });
   }
 
+  //FIXME: something about state or token not being reset when user clicks Logout after being logged in
   handleLogout() {
     localStorage.removeItem("token");
     this.setState({ currUser: {}, isLoggedIn: false });
