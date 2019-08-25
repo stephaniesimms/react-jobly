@@ -1,4 +1,4 @@
-Full stack application for applying to jobs with a React frontend and RESTful API to retrieve data from the Node.js Express and PostgreSQL backend. 
+Full stack application for applying to jobs with a React frontend and RESTful API to retrieve data from the Node.js Express and PostgreSQL backend. Backend built as a separate exercise - backend code in this repository provided by [Rithm School](https://www.rithmschool.com/). Frontend pair programmed with [Mara Greene](https://github.com/mrgjune).
 
 ## Frontend Installation
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
